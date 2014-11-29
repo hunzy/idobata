@@ -2,8 +2,8 @@
 ゆるく繋がるチャットアプリ
 
 使ってるライブラリ
+* [jQuery](http://jquery.com/)
 * [milkcocoa](https://mlkcca.com/)
-* [p5.js](http://p5js.org/)
 
 対応確認ブラウザ
 * Chrome

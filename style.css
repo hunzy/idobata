@@ -1,5 +1,6 @@
 html, body{
     margin: 0;
+    background-color: #bbb;
 }
 
 #attender{
@@ -21,17 +22,20 @@ html, body{
     bottom: 10px;
     left: 50%;
     margin-left: -180px;
-    font-size: 20px;
+    font-size: 22px;
     padding: 0px 15px;
 }
 
 .circle{
     display: table;
+    position: absolute;
     border: 1px solid #000;
     border-radius: 50%;
     -webkit-background-clip: padding-box; /*safariで背景がはみ出ないように*/
-    animation: Pump .3s ease;
-    -webkit-animation: Pump .3s ease;
+    animation: Pump 30s ease-out;
+    animation-fill-mode: forwards;
+    -webkit-animation: Pump 30s ease-out;
+    -webkit-animation-fill-mode: forwards;
 }
 
 .circleText{
@@ -40,14 +44,26 @@ html, body{
     vertical-align: middle;
 }
 
-/* コメント投稿時のアニメーション */
 @keyframes Pump{
-    0%{transform: scale(1.0, 1.0);}
-    50%{transform: scale(1.3, 1.3);}
-    100{transform: scale(1.0, 1.0);}
+    0%{
+        transform: scale(1.0, 1.0);
+        opacity: 1;
+    }
+    1%{transform: scale(1.1, 1.1);}
+    100%{
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
 }
+
 @-webkit-keyframes Pump{
-    0%{-webkit-transform: scale(1.0, 1.0);}
-    50%{-webkit-transform: scale(1.3, 1.3);}
-    100{-webkit-transform: scale(1.0, 1.0);}
+    0%{
+        -webkit-transform: scale(1.0, 1.0);
+        opacity: 1;
+    }
+    1%{-webkit-transform: scale(1.1, 1.1);}
+    100%{
+        -webkit-transform: scale(0, 0);
+        opacity: 0.5;
+    }
 }

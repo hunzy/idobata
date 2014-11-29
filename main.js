@@ -1,56 +1,57 @@
-var milkcocoa = new MilkCocoa("https://io-bi3094j05.mlkcca.com/");
-var dataStore = milkcocoa.dataStore("data");
-var textinput, attenderNum;
+$(function(){
 
-window.onload = function(){
-  textinput   = document.getElementById("textinput");
-  attenderNum = document.getElementById("attender__num");
+  var milkcocoa = new MilkCocoa("https://io-bi3094j05.mlkcca.com/");
+  var dataStore = milkcocoa.dataStore("data");
+  var $textinput = $("#textinput");
+  var $attenderNum = $("#attender__num");
+  var $window = $(window);
 
-  textinput.addEventListener("keydown", sendComment, false);
-}
-
-function setup() {
-  colorMode(HSB, 255);
-  createCanvas(windowWidth, windowHeight);
-  background(0, 0, 180);
-}
-
-function draw() {
-}
-
-function sendComment(event){
-  if(textinput.value == ""){} // 入力が無い場合は何もしない
-  else if(event.keyCode == 13){
-    dataStore.send({message: textinput.value}, function(data){
-      textinput.value = "";
-    })
+  // コメント入力を監視し、sendイベントを送る
+  $textinput.on("keydown", sendComment);
+  function sendComment(event){
+    if( $textinput.val() == "" ){}  // 入力が無い場合は何もしない
+    else if( event.keyCode == 13 ){ // Enterが押された時
+      dataStore.send({message: $textinput.val()}, function(data){
+        $textinput.val("");
+      })
+    }
   }
-}
 
-dataStore.on("send", function(data){
-  r = 200;
-  x = random(windowWidth - r);
-  y = random(windowHeight - r - 100);
-  drawCircleText(data.value.message, x, y, r);
-})
+  // sendイベントを受け取り次第、円形のコメントを描画
+  dataStore.on("send", function(data){
+    r = 200;
+    x = Random(0, $window.width() - r);
+    y = Random(0, $window.height() - r - 100);
+    drawCircleText(data.value.message, x, y, r);
+  })
 
-function drawCircleText(_txt, _x, _y, _r){
-  // DOMを生成する
-  var red = Random(255);
-  var green = Random(255);
-  var blue = Random(255);
-  var circle = createDiv("");
-  var text = createP(_txt);
-  circle.addClass("circle");
-  text.addClass("circleText");
-  circle.style("backgroundColor", "rgba("+ red + "," + green + "," + blue +", 0.5)");
-  circle.style("width", _r+"px");
-  circle.style("height", _r+"px");
-  circle.child(text);
-  circle.position(_x, _y);
-}
+  // コメントの描画処理
+  function drawCircleText(_txt, _x, _y, _r){
+    // 色をランダムに選択
+    var red   = Random(0, 255);
+    var green = Random(0, 255);
+    var blue  = Random(0, 255);
+    // 円形の生成
+    var $circle = $("<div>")
+    $circle.addClass("circle");
+    $circle.css({
+      backgroundColor: "rgb("+ red + "," + green + "," + blue +")",
+      width:   _r+'px',
+      height:  _r+'px',
+      left:    _x+'px',
+      top:     _y+'px'
+    });
+    // テキストの生成
+    var $text = $("<p>");
+    $text.text(_txt);
+    $text.addClass("circleText");
+    $circle.append($text);
+    // 画面に描画
+    $("body").append($circle);
+  }
 
-function Random(_n){
-  console.log(Math.floor( Math.random() * _n ));
-  return Math.floor( Math.random() * _n );
-}
+  function Random(_min, _max){
+    return Math.floor( Math.random() * (_max - _min) + _min );
+  }
+
+});

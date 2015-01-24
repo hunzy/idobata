@@ -1,17 +1,20 @@
 html, body{
     margin: 0;
-    background-color: #bbb;
+    background: url("grid.png");
+}
+
+#header{
+    width: 100%;
+    background-color: #eee;
+    padding: 8px 0;
+    box-shadow: 0 2px 5px #999;
 }
 
 #attender{
-    width: 200px;
-    position: fixed;
     text-align: center;
-    top: 10px;
-    left: 50%;
-    margin-left: -100px;
+    margin: 0;
     font-size: 20px;
-    color: #fff;
+    color: #666;
 }
 #textinput{
     box-sizing: border-box;

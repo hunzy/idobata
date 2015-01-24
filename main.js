@@ -19,35 +19,32 @@ $(function(){
 
   // sendイベントを受け取り次第、円形のコメントを描画
   dataStore.on("send", function(data){
-    r = 200;
-    x = Random(0, $window.width() - r);
-    y = Random(0, $window.height() - r - 100);
-    drawCircleText(data.value.message, x, y, r);
+    x = Random(0, $window.width() - 200);
+    y = Random(50, $window.height() - 300);
+    drawMsgText(data.value.message, x, y);
   })
 
   // コメントの描画処理
-  function drawCircleText(_txt, _x, _y, _r){
+  function drawMsgText(_txt, _x, _y){
     // 色をランダムに選択
     var red   = Random(0, 255);
     var green = Random(0, 255);
     var blue  = Random(0, 255);
     // 円形の生成
-    var $circle = $("<div>")
-    $circle.addClass("circle");
-    $circle.css({
-      backgroundColor: "rgb("+ red + "," + green + "," + blue +")",
-      width:   _r+'px',
-      height:  _r+'px',
+    var $msg = $("<div>")
+    $msg.addClass("msg");
+    $msg.css({
+      border: "1px solid rgb("+ red + "," + green + "," + blue +")",
       left:    _x+'px',
       top:     _y+'px'
     });
     // テキストの生成
     var $text = $("<p>");
     $text.text(_txt);
-    $text.addClass("circleText");
-    $circle.append($text);
+    $text.addClass("msgText");
+    $msg.append($text);
     // 画面に描画
-    $("body").append($circle);
+    $("body").append($msg);
   }
 
   function Random(_min, _max){

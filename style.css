@@ -29,19 +29,45 @@ html, body{
     padding: 0px 15px;
 }
 
-.circle{
+.msg{
     display: table;
     position: absolute;
-    border: 1px solid #000;
-    border-radius: 50%;
+    border-radius: 30px;
+    width: 200px;
+    background-color: #fff;
+    padding: 15px;
     -webkit-background-clip: padding-box; /*safariで背景がはみ出ないように*/
     animation: Pump 30s ease-out;
     animation-fill-mode: forwards;
     -webkit-animation: Pump 30s ease-out;
     -webkit-animation-fill-mode: forwards;
 }
+/*.msg::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-top: 15px solid #000;
+    left: 30px;
+    bottom: -30px;
+    z-index: 10;
+}
+.msg::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-top: 15px solid #fff;
+    left: 30px;
+    bottom: -29px;
+    z-index: 100;
+}*/
 
-.circleText{
+.msgText{
     display: table-cell;
     text-align: center;
     vertical-align: middle;
